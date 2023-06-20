@@ -3,14 +3,13 @@ import React from 'react'
 
 type Props = {
   children?: React.ReactNode | undefined
-  variant?: string
-  style?: string
+  variant?: 'primary' | 'neutral' | 'ghost' | 'danger'
   onClick?: () => void | undefined
 }
 
-function Button(props: Props) {
+function Button({ variant = 'primary', onClick, children }: Props) {
   const buttonStyle = () => {
-    switch (props.variant) {
+    switch (variant) {
       case 'primary':
         return 'btn btn-primary'
       case 'neutral':
@@ -24,11 +23,8 @@ function Button(props: Props) {
     }
   }
   return (
-    <button
-      className={`${buttonStyle()} ${props.style} btn-sm`}
-      onClick={props.onClick}
-    >
-      {props.children}
+    <button className={`${buttonStyle()} btn-sm`} onClick={onClick}>
+      {children}
     </button>
   )
 }
